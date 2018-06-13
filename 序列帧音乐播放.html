@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            width: 660px;
+            margin: 100px auto;
+            list-style: none;
+        }
+        li{
+            width: 80px;
+            height: 30px;
+            float: left;
+            line-height: 30px;
+            position: relative;
+            border: 1px solid #c0b6b4;
+            overflow: hidden;
+        }
+        span{
+            width:80px ;
+            height: 30px;
+            position: absolute;
+            top: 30px;
+            left: 0;
+        }
+        i{
+            width: 78px;
+            font-style: normal;   /*i标签是斜体  加font-style: normal; 就可以是正的了*/
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            text-align: center;
+        }
+        img{
+            width: 290px;
+            height: 500px;
+            margin:  auto;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><i>1</i><span></span></li>
+    <li><i>2</i><span></span></li>
+    <li><i>3</i><span></span></li>
+    <li><i>4</i><span></span></li>
+    <li><i>5</i><span></span></li>
+    <li><i>6</i><span></span></li>
+    <li><i>7</i><span></span></li>
+    <li><i>8</i><span></span></li>
+</ul>
+<audio src="m/1.mp3"></audio>
+<audio src="m/2.mp3"></audio>
+<audio src="m/3.mp3"></audio>
+<audio src="m/4.mp3"></audio>
+<audio src="m/5.mp3"></audio>
+<audio src="m/6.mp3"></audio>
+<audio src="m/7.mp3"></audio>
+<audio src="m/c5.mp3"></audio>
+<img src="纸短情长简谱.jpg" alt="">
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var arr =['red','orange','yellow','green','cyan','blue','purple','pink'];
+    $('span').each(function (i,e) {
+        $(e).css('background',arr[i])
+    });
+
+    $('li').on('mouseenter',function () {
+        $(this).children('span').stop().animate({top:0},100);
+        $('audio').get($(this).index()).load();
+        $('audio').get($(this).index()).play();
+    }).on('mouseleave',function () {
+        $(this).children('span').stop().animate({top:30},100);
+    });
+
+    $(window).on('keydown',function (e) {
+        if(e.keyCode>=49 && e.keyCode<=56)
+        var index = e.keyCode-49;
+        $('li').eq(index).trigger('mouseenter');
+        setTimeout(function () {
+            $('li').trigger('mouseleave');
+        },200)
+    })
+</script>
+</html>
